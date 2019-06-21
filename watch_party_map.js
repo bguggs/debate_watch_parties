@@ -191,7 +191,7 @@ class Event {
 
 
     formattedInfoWindow() {
-        return `<div class="text-strato-blue"><img class="featured_image" style="width:100%;" src="${this.image_url}"/><h2 class="mt-3">${this.title}</h2><span class="intro mb-2">${this.formattedDate()} - <a href="${this.external_url}">${this.external_url}</a></span><p>${this.description}</p></div>`
+        return `<div class="text-strato-blue"><img class="featured_image" style="width:100%;" src="${this.image_url}"/><h2 class="mt-3">${this.title}</h2><span class="intro mb-2">${this.formattedDate()} - <a target="_blank" href="${this.external_url}">${this.external_url}</a></span><p>${this.description}</p></div>`
     }
 
 
