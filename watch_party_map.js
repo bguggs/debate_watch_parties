@@ -129,7 +129,6 @@ class Event {
 
         const icon_url = organization['icon_url'];
         if (!(this.external_url in location_data)){
-            console.log(this.external_url);
             location_data[`${this.external_url}`] = event_location;
         }
 
@@ -178,13 +177,14 @@ class Event {
             ps.findPlaceFromQuery(request, function (results, status) {
                 if (status === 'OK') {
                     this_event.createMapMarker(results[0].geometry.location, m, this_candidate);
-                } else if (status === 'OVER_QUERY_LIMIT') {
-                    var millisecondsToWait = Math.random() * 5000;
-                    setTimeout(function() {
-                        // this_event.createMapMarkerFromQuery(location_query, places_service, map, this_candidate);
-                    }, millisecondsToWait);
-
                 }
+                // else if (status === 'OVER_QUERY_LIMIT') {
+                //     var millisecondsToWait = Math.random() * 5000;
+                //     setTimeout(function() {
+                //         this_event.createMapMarkerFromQuery(location_query, places_service, map, this_candidate);
+                //     }, millisecondsToWait);
+                //
+                // }
             });
         });
     }
@@ -218,7 +218,6 @@ function createMarkersForMobilizeUrl(url, places_service, map, candidate) {
                         e.createMapMarker(event_loc, map, candidate);
                     }
                     else if (e.external_url in location_data) {
-                        console.log(e.external_url, "found")
                         const event_loc = new google.maps.LatLng(location_data[e.external_url]['lat'],
                                                     location_data[e.external_url]['lng']);
                         e.createMapMarker(event_loc, map, candidate);
@@ -229,7 +228,6 @@ function createMarkersForMobilizeUrl(url, places_service, map, candidate) {
                         const event_locality = event['location']['locality'];
                         const event_region = event['location']['region'];
                         const loc_string = `${event_locality}, ${event_region} ${event_zip}`;
-                        console.log(e.external_url, loc_string, "not found");
                         e.createMapMarkerFromQuery(loc_string, places_service, map, candidate);
                     }
                     saved_event = e;
